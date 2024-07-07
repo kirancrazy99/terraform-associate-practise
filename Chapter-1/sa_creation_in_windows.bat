@@ -7,4 +7,5 @@ for /f "tokens=*" %i in ('gcloud info --format="value(config.project)"') do set 
 REM This command adds the service account to the IAM policy binding of the Google Cloud project with the "roles/editor" role
 gcloud projects add-iam-policy-binding %GOOGLE_CLOUD_PROJECT% --member="serviceAccount:%GOOGLE_SERVICE_ACCOUNT%" --role="roles/editor"
 
-REM $PLACEHOLDER$
+REM This command creates a key file named "terraform.json" for the service account using the "gcloud iam service-accounts keys create" command
+gcloud iam service-accounts keys create "./terraform.json" --iam-account=%GOOGLE_SERVICE_ACCOUNT%
